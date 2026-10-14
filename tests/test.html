@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>타이머 테스트</title>
+  <style>
+    body { font-family: monospace; padding: 1rem; }
+    .pass { color: green; }
+    .fail { color: red; }
+  </style>
+</head>
+<body>
+  <h1 id="summary">실행 중...</h1>
+  <ul id="results"></ul>
+  <script>
+    const tests = [];
+    function test(name, fn) { tests.push({ name, fn }); }
+    function eq(actual, expected) {
+      if (actual !== expected) {
+        throw new Error('expected ' + JSON.stringify(expected) + ', got ' + JSON.stringify(actual));
+      }
+    }
+  </script>
+  <script src="../timer-core.js"></script>
+  <script src="timer-core.test.js"></script>
+  <script>
+    let failed = 0;
+    const list = document.getElementById('results');
+    for (const t of tests) {
+      const li = document.createElement('li');
+      try {
+        t.fn();
+        li.className = 'pass';
+        li.textContent = 'PASS ' + t.name;
+      } catch (e) {
+        failed++;
+        li.className = 'fail';
+        li.textContent = 'FAIL ' + t.name + ' — ' + e.message;
+      }
+      list.appendChild(li);
+    }
+    document.getElementById('summary').textContent =
+      (failed === 0 ? 'ALL PASS' : failed + ' FAILED') + ' (' + tests.length + ' tests)';
+  </script>
+</body>
+</html>
