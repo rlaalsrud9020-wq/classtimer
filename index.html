@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수업 타이머</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="stage">
+    <div id="time" class="time" aria-live="off">00:00</div>
+    <div id="doneMessage" class="done-message" hidden>시간 끝!</div>
+  </main>
+
+  <section class="controls" id="controls">
+    <div class="group">
+      <button class="preset" data-minutes="5">5분</button>
+      <button class="preset" data-minutes="10">10분</button>
+      <button class="preset" data-minutes="15">15분</button>
+    </div>
+
+    <form class="group custom" id="customForm" autocomplete="off" novalidate>
+      <input id="minInput" type="number" min="0" max="999" inputmode="numeric" placeholder="분" aria-label="분">
+      <span class="sep">:</span>
+      <input id="secInput" type="number" min="0" max="59" inputmode="numeric" placeholder="초" aria-label="초">
+      <button type="submit">시작</button>
+    </form>
+
+    <div class="group">
+      <button id="pauseBtn" disabled>일시정지</button>
+      <button id="resetBtn">초기화</button>
+      <button id="soundBtn" aria-pressed="true">🔔 소리 켜짐</button>
+      <button id="fullscreenBtn">⛶ 전체화면</button>
+    </div>
+    <p id="error" class="error" role="alert"></p>
+  </section>
+
+  <script src="timer-core.js"></script>
+  <script src="timer.js"></script>
+</body>
+</html>
